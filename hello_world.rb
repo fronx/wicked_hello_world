@@ -63,7 +63,7 @@ class Ant
     return @queen if @queen
     @queen = new
     class << @queen
-      def say
+      def puke
         puts @belly.map { |shugary| (100 + shugary).chr rescue ' ' }.join
       end
 
@@ -101,4 +101,4 @@ end.lotz do |it|
 end
 
 Ant.queen.getz_shugarz
-Ant.queen.say
+Ant.queen.puke
