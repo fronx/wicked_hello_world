@@ -7,7 +7,7 @@ Number Integer do (
 
 Text do (
   replaceAt = method(i, s,
-    self[0..i-1] + s + self[i+1..-1]
+    if(i > 0, self[0..i-1], "") + s + self[i+1..-1]
   )
 )
 
@@ -51,6 +51,7 @@ o . . . . . . . . . .
     b4 = on(x, y)
     y = y norm(:y). x = x norm(:x)
     feeld[y] = feeld[y] replaceAt(x, ".")
+    feeld inspect println
     b4
   )
 
@@ -87,11 +88,9 @@ Ant do (
 
 System ifMain(
   Ant lotz(fn(ant,
-    if(ant wawkz && ant hazFowndShugarz?,
+    if(ant wawkz. ant hazFowndShugarz?,
       ant nomNom)
-  ))
-
-  Ant lotz map(ant, ant belly) println
+  )) map(ant, ant belly) select(b, !(b empty?)) println
 ;   Ant.queen.getz_shugarz
 ;   Ant.queen.puke
 )
