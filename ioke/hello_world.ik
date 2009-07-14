@@ -43,7 +43,8 @@ o . . . . . . . . . .
   maxY = feeld length
 
   on = method(x, y,
-    feeld[y norm(:y)][(x norm(:x))..(x norm(:x))]
+    y = y norm(:y). x = x norm(:x)
+    feeld[y][(x)..(x)]
   )
 
   getz_me = method(x, y,
@@ -56,13 +57,41 @@ o . . . . . . . . . .
 )
 
 Ant = Origin mimic
-Ant initialize = method(
-  self x = System randomNumber % 11
-  self y = System randomNumber % 24
-  self belly = []
+Ant do (
+  initialize = method(
+    self x = System randomNumber % 11
+    self y = System randomNumber % 24
+    self belly = []
+  )
+
+  lotz = method(block nil,
+    __lotz ||= (1..99) map(i, mimic) map(ant,
+      if(block, 30 times(i, block call(ant)))
+      ant
+    )
+  )
+
+  wawkz = method(
+    self x += (System randomNumber % 3) - 1
+    self y += (System randomNumber % 3) - 1
+  )
+
+  hazFowndShugarz? = method(
+    Urf on(self x, self y) != "."
+  )
+
+  nomNom = method(
+    self belly << [x, y, Urf getz_me(x, y)]
+  )
 )
 
-; System ifMain(
+System ifMain(
+  Ant lotz(fn(ant,
+    if(ant wawkz && ant hazFowndShugarz?,
+      ant nomNom)
+  ))
+
+  Ant lotz map(ant, ant belly) println
 ;   Ant.queen.getz_shugarz
 ;   Ant.queen.puke
-; )
+)
