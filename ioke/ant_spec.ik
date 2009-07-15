@@ -35,4 +35,14 @@ describe(Ant,
       Ant lotz first x < 0 should == true
     )
   )
+  
+  describe("queen",
+    it("should return a queen ant... or an ant queen",
+      Ant queen should mimic(Ant)
+    )
+
+    it("should puke hello world",
+      Ant queen puke should == "hello world"
+    )
+  )
 )

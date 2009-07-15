@@ -65,6 +65,21 @@ Ant do (
     self belly = []
   )
 
+  queen = mimic do(
+    puke = method(
+      self belly map(shugary, (100 + shugary) rescue ' ' ) join
+    )
+
+    getz_shugarz = method(
+      self belly = []
+      Ant lotz map(ant, ant belly) compact each(belly,
+        belly each(xything,
+          self belly[xything[0] norm(:x)] = xything[1] norm(:y) if xything[2] == 'o'
+        )
+      )
+    )
+  )
+
   lotz = method(block nil,
     __lotz ||= (1..99) map(i, mimic) map(ant,
       if(block, 30 times(i, block call(ant)))
@@ -91,6 +106,7 @@ System ifMain(
     if(ant wawkz. ant hazFowndShugarz?,
       ant nomNom)
   )) map(ant, ant belly) select(b, !(b empty?)) println
-;   Ant.queen.getz_shugarz
-;   Ant.queen.puke
+
+  Ant queen getz_shugarz
+  Ant queen puke println
 )
