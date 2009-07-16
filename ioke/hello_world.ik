@@ -42,17 +42,19 @@ o . . . . . . . . . .
   maxX = feeld first length
   maxY = feeld length
 
-  on = method(x, y,
+  some = method(xy,
+    System randomNumber % if(xy == :x, maxX, maxY)
+  )
+
+  on = method(x, y, getz: false,
     y = y norm(:y). x = x norm(:x)
-    feeld[y][(x)..(x)]
+    b4 = feeld[y][(x)..(x)]
+    if(getz, feeld[y] = feeld[y] replaceAt(x, "."))
+    b4
   )
 
   getz_me = method(x, y,
-    b4 = on(x, y)
-    y = y norm(:y). x = x norm(:x)
-    feeld[y] = feeld[y] replaceAt(x, ".")
-    feeld inspect println
-    b4
+    on(x, y, getz: true)
   )
 
 )
@@ -60,53 +62,59 @@ o . . . . . . . . . .
 Ant = Origin mimic
 Ant do (
   initialize = method(
-    self x = System randomNumber % 11
-    self y = System randomNumber % 24
+    self x = Urf some(:x)
+    self y = Urf some(:y)
     self belly = []
-  )
-
-  queen = mimic do(
-    puke = method(
-      self belly map(shugary, (100 + shugary) rescue ' ' ) join
-    )
-
-    getz_shugarz = method(
-      self belly = []
-      Ant lotz map(ant, ant belly) compact each(belly,
-        belly each(xything,
-          self belly[xything[0] norm(:x)] = xything[1] norm(:y) if xything[2] == 'o'
-        )
-      )
-    )
-  )
-
-  lotz = method(block nil,
-    __lotz ||= (1..99) map(i, mimic) map(ant,
-      if(block, 30 times(i, block call(ant)))
-      ant
-    )
   )
 
   wawkz = method(
     self x += (System randomNumber % 3) - 1
     self y += (System randomNumber % 3) - 1
+    true
   )
 
   hazFowndShugarz? = method(
-    Urf on(self x, self y) != "."
+    Urf on(x, y) != "."
   )
 
   nomNom = method(
-    self belly << [x, y, Urf getz_me(x, y)]
+    belly << [x, y, Urf getz_me(x, y)]
+  )
+)
+
+Colony = Origin mimic do (
+  lotz = method(block,
+    self lotz = (1..99) map(i, Ant mimic) map(ant,
+      30 times(i, block call(ant))
+      ant
+    )
+  )
+)
+
+queen = Ant mimic do(
+  belly = []
+
+  puke = method(
+    belly map(shugary, (100 + (shugary || -68)) char) join
+  )
+
+  getz_shugarz = method(
+    Colony lotz map(ant, ant belly) compact each(belly,
+      belly each(xything,
+        if(xything[2] == "o",
+          self belly[xything[0] norm(:x)] = xything[1] norm(:y)
+        )
+      )
+    )
+    self
   )
 )
 
 System ifMain(
-  Ant lotz(fn(ant,
-    if(ant wawkz. ant hazFowndShugarz?,
+  Colony lotz(fn(ant,
+    if(ant wawkz && ant hazFowndShugarz?,
       ant nomNom)
-  )) map(ant, ant belly) select(b, !(b empty?)) println
+  ))
 
-  Ant queen getz_shugarz
-  Ant queen puke println
+  Ant queen getz_shugarz puke println
 )

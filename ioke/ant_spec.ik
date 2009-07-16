@@ -22,27 +22,4 @@ describe(Ant,
   it("should have an empty belly",
     Ant mimic belly should == []
   )
-
-  describe("lotz",
-    it("should return lotz of antz",
-      Ant lotz should have kind("List")
-      Ant lotz first should have kind("Ant")
-    )
-
-    it("should run a given block 30 times",
-      Ant lotz(fn(ant, ant x--)) should have kind("List")
-      Ant lotz first should have kind("Ant")
-      Ant lotz first x < 0 should == true
-    )
-  )
-  
-  describe("queen",
-    it("should return a queen ant... or an ant queen",
-      Ant queen should mimic(Ant)
-    )
-
-    it("should puke hello world",
-      Ant queen puke should == "hello world"
-    )
-  )
 )
